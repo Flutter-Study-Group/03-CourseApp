@@ -1,0 +1,234 @@
+import 'package:courseapp/constants.dart';
+import 'package:flutter/material.dart';
+
+class Payment extends StatelessWidget {
+  GlobalKey<ScaffoldState> _key = new GlobalKey();
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      key: _key,
+      backgroundColor: Colors.white,
+      body: Container(
+        padding: EdgeInsets.all(20),
+        child: SingleChildScrollView(
+          child: Column(
+            children: <Widget>[
+              SizedBox(
+                height: 60,
+              ),
+              buildAppBar(),
+              buildCard(),
+              SizedBox(
+                height: 20,
+              ),
+              buildForm(),
+              SizedBox(
+                height: 20,
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 10.0, right: 10),
+                child: Container(
+                  padding: EdgeInsets.all(8),
+                  decoration: BoxDecoration(
+                      color: primaryColor,
+                      borderRadius: BorderRadius.circular(12)),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.max,
+                    children: <Widget>[
+                      Expanded(
+                        child: FlatButton(
+                          onPressed: () {},
+                          child: Text(
+                            "Use this card",
+                            style: textStyle.copyWith(
+                                color: Colors.white, fontSize: 17),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              )
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Container buildCard() {
+    return Container(
+      height: 214,
+      width: 327,
+      decoration: BoxDecoration(
+          color: primaryColor,
+          gradient: LinearGradient(colors: [
+            primaryColor,
+            primaryColor.withOpacity(0.9),
+            primaryColor.withOpacity(0.85),
+            primaryColor.withOpacity(0.8),
+//            Color(0xFF141E35).withOpacity(1),
+          ]),
+          borderRadius: BorderRadius.circular(5)),
+      child: Column(
+        children: <Widget>[
+          Container(
+            padding: EdgeInsets.all(20),
+            alignment: Alignment.centerRight,
+            child: Image(
+              image: AssetImage("assets/mc_symbol.png"),
+            ),
+          ),
+          Container(
+            child: Text("0192 8344 7564 4444",
+                style: textStyle.copyWith(color: Colors.white, fontSize: 26)),
+          ),
+          SizedBox(
+            height: 30,
+          ),
+          Container(
+            padding: EdgeInsets.symmetric(horizontal: 35),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Text(
+                  "Aman Sahu".toUpperCase(),
+                  style: textStyle.copyWith(color: Colors.white, fontSize: 20),
+                ),
+                Text(
+                  "04/22",
+                  style: textStyle.copyWith(color: Colors.white, fontSize: 20),
+                )
+              ],
+            ),
+          )
+        ],
+      ),
+    );
+  }
+
+  buildAppBar() {
+    return Container(
+      padding: EdgeInsets.only(bottom: 20),
+      child: Row(
+        children: <Widget>[
+          Container(
+            decoration: BoxDecoration(
+                color: Colors.grey.withOpacity(0.5),
+                borderRadius: BorderRadius.circular(12)),
+            child: IconButton(
+              onPressed: () {
+                Navigator.of(_key.currentContext).pop();
+              },
+              icon: Icon(
+                Icons.arrow_back_ios,
+                color: Colors.black,
+              ),
+            ),
+          ),
+          SizedBox(
+            width: 20,
+          ),
+          Text(
+            "Credit / Debit Card",
+            style: textStyle.copyWith(
+                color: primaryColor, fontSize: 22, fontWeight: FontWeight.bold),
+          )
+        ],
+      ),
+    );
+  }
+
+  buildForm() {
+    return Padding(
+      padding: const EdgeInsets.all(10.0),
+      child: Container(
+        child: Column(
+          children: <Widget>[
+            TextFormField(
+              maxLength: 20,
+              textCapitalization: TextCapitalization.characters,
+              decoration: InputDecoration(
+                  border: OutlineInputBorder(
+                      borderSide: BorderSide(color: Color(0xff8698A8)),
+                      borderRadius: BorderRadius.circular(12)),
+                  labelText: "Name on card",
+                  labelStyle: textStyle.copyWith(
+                      color: Color(0xFF8698A8), fontSize: 20),
+                  counterText: ""),
+              style:
+                  textStyle.copyWith(fontSize: 17, fontWeight: FontWeight.w500),
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            TextFormField(
+              maxLength: 16,
+              textCapitalization: TextCapitalization.characters,
+              decoration: InputDecoration(
+                  border: OutlineInputBorder(
+                      borderSide: BorderSide(color: Color(0xff8698A8)),
+                      borderRadius: BorderRadius.circular(12)),
+                  labelText: "Card Number",
+                  labelStyle: textStyle.copyWith(
+                      color: Color(0xFF8698A8), fontSize: 20),
+                  counterText: ""),
+              style:
+                  textStyle.copyWith(fontSize: 17, fontWeight: FontWeight.w500),
+              keyboardType: TextInputType.number,
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            Container(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  Container(
+                    width: 154,
+                    child: TextFormField(
+                      maxLength: 20,
+                      textCapitalization: TextCapitalization.characters,
+                      decoration: InputDecoration(
+                          border: OutlineInputBorder(
+                              borderSide: BorderSide(color: Color(0xff8698A8)),
+                              borderRadius: BorderRadius.circular(12)),
+                          labelText: "Expiry date",
+                          labelStyle: textStyle.copyWith(
+                              color: Color(0xFF8698A8), fontSize: 20),
+                          counterText: ""),
+                      style: textStyle.copyWith(
+                          fontSize: 17, fontWeight: FontWeight.w500),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Container(
+                    width: 154,
+                    child: TextFormField(
+                      maxLength: 3,
+                      textCapitalization: TextCapitalization.characters,
+                      decoration: InputDecoration(
+                          border: OutlineInputBorder(
+                              borderSide: BorderSide(color: Color(0xff8698A8)),
+                              borderRadius: BorderRadius.circular(12)),
+                          labelText: "CVC",
+                          labelStyle: textStyle.copyWith(
+                              color: Color(0xFF8698A8), fontSize: 20),
+                          counterText: ""),
+                      style: textStyle.copyWith(
+                          fontSize: 17, fontWeight: FontWeight.w500),
+                      keyboardType: TextInputType.number,
+                    ),
+                  )
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
