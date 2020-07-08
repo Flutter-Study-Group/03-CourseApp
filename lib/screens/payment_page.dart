@@ -1,8 +1,28 @@
 import 'package:courseapp/constants.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
-class Payment extends StatelessWidget {
+class Payment extends StatefulWidget {
+  @override
+  _PaymentState createState() => _PaymentState();
+}
+
+class _PaymentState extends State<Payment> {
   GlobalKey<ScaffoldState> _key = new GlobalKey();
+  TextEditingController _name = new TextEditingController();
+  TextEditingController _cardNumber = new TextEditingController();
+  TextEditingController _expDate = new TextEditingController();
+  TextEditingController _CVC = new TextEditingController();
+  String name, number, expDate, cvc;
+
+  @override
+  void initState() {
+    super.initState();
+    name = "Name of Card Holder";
+    number = "0000  0000  0000  0000";
+    expDate = "00/00";
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +35,7 @@ class Payment extends StatelessWidget {
           child: Column(
             children: <Widget>[
               SizedBox(
-                height: 60,
+                height: 40,
               ),
               buildAppBar(),
               buildCard(),
@@ -81,7 +101,7 @@ class Payment extends StatelessWidget {
             ),
           ),
           Container(
-            child: Text("0192 8344 7564 4444",
+            child: Text(number,
                 style: textStyle.copyWith(color: Colors.white, fontSize: 26)),
           ),
           SizedBox(
@@ -93,11 +113,13 @@ class Payment extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 Text(
-                  "Aman Sahu".toUpperCase(),
+                  name.toUpperCase(),
                   style: textStyle.copyWith(color: Colors.white, fontSize: 20),
+                  overflow: TextOverflow.ellipsis,
+                  textScaleFactor: 0.7,
                 ),
                 Text(
-                  "04/22",
+                  expDate,
                   style: textStyle.copyWith(color: Colors.white, fontSize: 20),
                 )
               ],
@@ -147,6 +169,7 @@ class Payment extends StatelessWidget {
         child: Column(
           children: <Widget>[
             TextFormField(
+              controller: _name,
               maxLength: 20,
               textCapitalization: TextCapitalization.characters,
               decoration: InputDecoration(
@@ -157,27 +180,46 @@ class Payment extends StatelessWidget {
                   labelStyle: textStyle.copyWith(
                       color: Color(0xFF8698A8), fontSize: 20),
                   counterText: ""),
-              style:
-                  textStyle.copyWith(fontSize: 17, fontWeight: FontWeight.w500),
+              style: textStyle.copyWith(
+                color: primaryColor,
+                fontSize: 17,
+                fontWeight: FontWeight.w500,
+              ),
+              onChanged: (value) {
+                setState(() {
+                  name = value;
+                });
+              },
             ),
             SizedBox(
               height: 20,
             ),
             TextFormField(
-              maxLength: 16,
-              textCapitalization: TextCapitalization.characters,
-              decoration: InputDecoration(
-                  border: OutlineInputBorder(
-                      borderSide: BorderSide(color: Color(0xff8698A8)),
-                      borderRadius: BorderRadius.circular(12)),
-                  labelText: "Card Number",
-                  labelStyle: textStyle.copyWith(
-                      color: Color(0xFF8698A8), fontSize: 20),
-                  counterText: ""),
-              style:
-                  textStyle.copyWith(fontSize: 17, fontWeight: FontWeight.w500),
-              keyboardType: TextInputType.number,
-            ),
+                controller: _cardNumber,
+                maxLength: 16 + 2 + 2 + 2,
+                textCapitalization: TextCapitalization.characters,
+                inputFormatters: [
+                  MyInputFormater(),
+                ],
+                decoration: InputDecoration(
+                    border: OutlineInputBorder(
+                        borderSide: BorderSide(color: Color(0xff8698A8)),
+                        borderRadius: BorderRadius.circular(12)),
+                    labelText: "Card Number",
+                    labelStyle: textStyle.copyWith(
+                        color: Color(0xFF8698A8), fontSize: 20),
+                    counterText: ""),
+                style: textStyle.copyWith(
+                  color: primaryColor,
+                  fontSize: 20,
+                  fontWeight: FontWeight.w500,
+                ),
+                keyboardType: TextInputType.number,
+                onChanged: (value) {
+                  setState(() {
+                    number = value;
+                  });
+                }),
             SizedBox(
               height: 20,
             ),
@@ -188,8 +230,13 @@ class Payment extends StatelessWidget {
                   Container(
                     width: 154,
                     child: TextFormField(
-                      maxLength: 20,
                       textCapitalization: TextCapitalization.characters,
+                      controller: _expDate,
+                      maxLength: 5,
+                      inputFormatters: [
+                        LengthLimitingTextInputFormatter(5),
+                        CardMonthFormatter()
+                      ],
                       decoration: InputDecoration(
                           border: OutlineInputBorder(
                               borderSide: BorderSide(color: Color(0xff8698A8)),
@@ -199,7 +246,16 @@ class Payment extends StatelessWidget {
                               color: Color(0xFF8698A8), fontSize: 20),
                           counterText: ""),
                       style: textStyle.copyWith(
-                          fontSize: 17, fontWeight: FontWeight.w500),
+                          color: primaryColor,
+                          fontSize: 17,
+                          fontWeight: FontWeight.w500),
+                      onChanged: (value) {
+                        if (value.length <= 5)
+                          setState(() {
+                            expDate = value;
+                          });
+                      },
+                      keyboardType: TextInputType.number,
                     ),
                   ),
                   SizedBox(
@@ -208,20 +264,29 @@ class Payment extends StatelessWidget {
                   Container(
                     width: 154,
                     child: TextFormField(
-                      maxLength: 3,
-                      textCapitalization: TextCapitalization.characters,
-                      decoration: InputDecoration(
-                          border: OutlineInputBorder(
-                              borderSide: BorderSide(color: Color(0xff8698A8)),
-                              borderRadius: BorderRadius.circular(12)),
-                          labelText: "CVC",
-                          labelStyle: textStyle.copyWith(
-                              color: Color(0xFF8698A8), fontSize: 20),
-                          counterText: ""),
-                      style: textStyle.copyWith(
-                          fontSize: 17, fontWeight: FontWeight.w500),
-                      keyboardType: TextInputType.number,
-                    ),
+                        maxLength: 3,
+                        textCapitalization: TextCapitalization.characters,
+                        obscureText: true,
+                        controller: _CVC,
+                        decoration: InputDecoration(
+                            border: OutlineInputBorder(
+                                borderSide:
+                                    BorderSide(color: Color(0xff8698A8)),
+                                borderRadius: BorderRadius.circular(12)),
+                            labelText: "CVC",
+                            labelStyle: textStyle.copyWith(
+                                color: Color(0xFF8698A8), fontSize: 20),
+                            counterText: ""),
+                        style: textStyle.copyWith(
+                            color: primaryColor,
+                            fontSize: 17,
+                            fontWeight: FontWeight.w500),
+                        keyboardType: TextInputType.number,
+                        onChanged: (value) {
+                          setState(() {
+                            cvc = value;
+                          });
+                        }),
                   )
                 ],
               ),
@@ -230,5 +295,37 @@ class Payment extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+class MyInputFormater extends TextInputFormatter {
+  @override
+  TextEditingValue formatEditUpdate(
+      TextEditingValue oldValue, TextEditingValue newValue) {
+    int newTextLength = newValue.text.length;
+    StringBuffer newText = new StringBuffer();
+    newText.write(newValue.text);
+    if (newTextLength == 4 || newTextLength == 10 || newTextLength == 16) {
+      newText.write('  ');
+    }
+    return TextEditingValue(
+        text: newText.toString(),
+        selection: TextSelection.collapsed(offset: newText.length));
+  }
+}
+
+class CardMonthFormatter extends TextInputFormatter {
+  @override
+  TextEditingValue formatEditUpdate(
+      TextEditingValue oldValue, TextEditingValue newValue) {
+    int newTextLength = newValue.text.length;
+    StringBuffer newText = new StringBuffer();
+    newText.write(newValue.text);
+    if (newTextLength == 2) {
+      newText.write('/');
+    }
+    return TextEditingValue(
+        text: newText.toString(),
+        selection: TextSelection.collapsed(offset: newText.length));
   }
 }
