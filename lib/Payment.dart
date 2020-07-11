@@ -447,12 +447,15 @@ class _CreditState extends State<Credit> {
                           ),
                         onFocusChange: (hasFocus) {
                           if (hasFocus) {
-                            cardKey.currentState.toggleCard();
-                          }
-                          else
-                            {
+                            if (cardKey.currentState.isFront) {
                               cardKey.currentState.toggleCard();
                             }
+                            }
+                          if(!hasFocus) {
+                            if (!cardKey.currentState.isFront) {
+                              cardKey.currentState.toggleCard();
+                            }
+                          }
                         }
                       ),
                     )
