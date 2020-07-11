@@ -1,4 +1,6 @@
+import 'package:coursesapp/PageRoute.dart';
 import 'package:coursesapp/courses.dart';
+import 'package:coursesapp/success.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flip_card/flip_card.dart';
 import 'package:flutter/cupertino.dart';
@@ -7,8 +9,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';
-
-import 'first.dart';
+import 'main.dart';
 
 class Credit extends StatefulWidget {
   @override
@@ -226,7 +227,7 @@ class _CreditState extends State<Credit> {
                           top: MediaQuery.of(context).size.height / 13,
                           child: Container(
                               padding: EdgeInsets.symmetric(
-                                  horizontal: 35, vertical:10),
+                                  horizontal: 35, vertical: 10),
                               alignment: Alignment.center,
                               child: Text(
                                 realcvv,
@@ -267,8 +268,8 @@ class _CreditState extends State<Credit> {
                 padding: const EdgeInsets.symmetric(horizontal: 24.0),
                 child: TextFormField(
                   inputFormatters: [
-                    new WhitelistingTextInputFormatter(RegExp("[a-zA-Z]")),
-                    new LengthLimitingTextInputFormatter(10),
+                    new WhitelistingTextInputFormatter(RegExp("[a-zA-Z ]")),
+                    new LengthLimitingTextInputFormatter(15),
                   ],
 
                   keyboardType: TextInputType.text,
@@ -285,6 +286,11 @@ class _CreditState extends State<Credit> {
                     if (value.isEmpty) {
                       return 'please Enter Name';
                     }
+                  },
+                  onChanged: (text) {
+                    setState(() {
+                      realname = nameController.text;
+                    });
                   },
                 ),
               ),
@@ -360,6 +366,11 @@ class _CreditState extends State<Credit> {
                       visa_name = "jcb.png";
                     }
                   },
+                  onChanged: (text) {
+                    setState(() {
+                      realnumber = numberController.text;
+                    });
+                  },
                 ),
               ),
               Padding(
@@ -408,6 +419,11 @@ class _CreditState extends State<Credit> {
                             color: Color(0xff8698A8),
                           )),
                         ),
+                        onChanged: (text) {
+                          setState(() {
+                            realexpiry = expiryController.text;
+                          });
+                        },
                       ),
                     ),
                     SizedBox(
@@ -438,26 +454,30 @@ class _CreditState extends State<Credit> {
                                 errorStyle: TextStyle(fontSize: 13),
                                 border: OutlineInputBorder(
                                     borderSide: new BorderSide(
-                                      color: Color(0xff8698A8),
-                                    )),
+                                  color: Color(0xff8698A8),
+                                )),
                                 suffixIcon: Icon(
                                   Icons.credit_card,
                                   color: Colors.black,
                                 )),
+                            onChanged: (text) {
+                              setState(() {
+                                realcvv = cvvController.text;
+                              });
+                            },
                           ),
-                        onFocusChange: (hasFocus) {
-                          if (hasFocus) {
-                            if (cardKey.currentState.isFront) {
-                              cardKey.currentState.toggleCard();
+                          onFocusChange: (hasFocus) {
+                            if (hasFocus) {
+                              if (cardKey.currentState.isFront) {
+                                cardKey.currentState.toggleCard();
+                              }
                             }
+                            if (!hasFocus) {
+                              if (!cardKey.currentState.isFront) {
+                                cardKey.currentState.toggleCard();
+                              }
                             }
-                          if(!hasFocus) {
-                            if (!cardKey.currentState.isFront) {
-                              cardKey.currentState.toggleCard();
-                            }
-                          }
-                        }
-                      ),
+                          }),
                     )
                   ],
                 ),
@@ -483,9 +503,17 @@ class _CreditState extends State<Credit> {
                         String number = numberController.text;
                         String cvv = cvvController.text;
                         realexpiry = expiry;
-                        realname = name;
+                        realname = nameController.text;
                         realnumber = number;
                         realcvv = cvv;
+                        Future.delayed(const Duration(milliseconds: 1500), () {
+                            // Here you can write your code
+                          setState(() {
+                            // Here you can write your code for open new view
+                            Navigator.push(context, BouncyPageRoute(widget: success()));
+                          });
+
+                        });
                       }
                     });
                   },
@@ -545,6 +573,7 @@ class _CreditState extends State<Credit> {
       ),
     );
   }
+
   @override
   void dispose() {
     _focusNode.dispose();
