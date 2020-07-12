@@ -1,5 +1,6 @@
 import 'package:animated_background/animated_background.dart';
 import 'package:coursesapp/main.dart';
+import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -38,86 +39,41 @@ class _successState extends State<success> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        leading: new IconButton(
-          icon: new Icon(
-            Icons.arrow_back,
-            color: Color(0xff141F35),
+        appBar: AppBar(
+          leading: new IconButton(
+            icon: new Icon(
+              Icons.arrow_back,
+              color: Color(0xff141F35),
+            ),
+            onPressed: () => Navigator.of(context).pop(),
           ),
-          onPressed: () => Navigator.of(context).pop(),
-        ),
-        title: Center(
-          widthFactor: 1.5,
-          child: Text(
-            'Confirmation',
-            style: TextStyle(
-                color: Color(0xff172137),
-                fontWeight: FontWeight.w800,
-                fontFamily: 'Poppins'),
+          title: Center(
+            widthFactor: 1.5,
+            child: Text(
+              'Confirmation',
+              style: TextStyle(
+                  color: Color(0xff172137),
+                  fontWeight: FontWeight.w800,
+                  fontFamily: 'Poppins'),
+            ),
           ),
+          backgroundColor: Colors.transparent,
+          elevation: 0.0,
         ),
-        backgroundColor: Colors.transparent,
-        elevation: 0.0,
-      ),
-      body: AnimatedBackground(
-        behaviour: _buildBehaviour(),
-        vsync: this,
-        child: SingleChildScrollView(
-          scrollDirection: Axis.vertical,
-          child: Center(
-            child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                mainAxisSize: MainAxisSize.max,
-                children: <Widget>[
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Expanded(
-                      child: Image.asset('images/confirmationlike.png'),
-                    ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.symmetric(vertical: 15),
-                    child: Text(
-                      "     Thank you \n for Reservations!",
-                      style: TextStyle(
-                          fontFamily: 'Poppins',
-                          fontSize: 25,
-                          color: Colors.black54,fontWeight: FontWeight.w600),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(28.0),
-                    child: SizedBox(
-                      width: MediaQuery.of(context).size.width / 1.4,
-                      height: 54.0,
-                      child: new FlatButton(
-                        child: Text(
-                          'Home',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontFamily: 'Poppins',
-                            fontSize: 18.5,
-                          ),
-                        ),
-                        color: Color(0xff267dce),
-                        onPressed: () {
-                          setState(() {
-                         Navigator.push(context, BouncyPageRoute(widget: MyPage()));
-                          });
-                        },
-                        shape: RoundedRectangleBorder(
-                            side: BorderSide(
-                                color: Colors.blue,
-                                width: 1,
-                                style: BorderStyle.solid),
-                            borderRadius: BorderRadius.circular(30)),
-                      ),
-                    ),
-                  ),
-                ]),
+        body: AnimatedBackground(
+          behaviour: _buildBehaviour(),
+          vsync: this,
+          child: SafeArea(
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(0, 0, 0, 128.0),
+              child: FlareActor(
+                  "images/success.flr", alignment: Alignment.center,
+                  fit: BoxFit.contain,
+                  animation: "success"),
+            ),
           ),
-        ),
-      ),
+        )
+
     );
   }
 }
