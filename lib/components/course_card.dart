@@ -2,11 +2,12 @@ import 'package:course_app/utilities/constants.dart';
 import 'package:flutter/material.dart';
 
 class CourseCard extends StatelessWidget {
-  final String courseTitle;
-  final String courseInstructor;
-  final double cardHeigth;
-  final double cardWidth;
-  final List<Positioned> cardElements;
+  /// Widget for displaying information along with its icon. Information
+  /// is structured into a title subtitle format while the a list of
+  /// [Positioned] widgets may be passed to added icon and various background
+  /// effects.
+  ///
+  /// Property [courseTitle] and [courseInstructor] cannot be null
 
   CourseCard({
     @required this.courseTitle,
@@ -15,6 +16,12 @@ class CourseCard extends StatelessWidget {
     this.cardWidth = 145.0,
     this.cardElements,
   });
+
+  final String courseTitle;
+  final String courseInstructor;
+  final double cardHeigth;
+  final double cardWidth;
+  final List<Positioned> cardElements;
 
   List<Widget> getStackChildren() {
     List<Widget> stackChildren = [];

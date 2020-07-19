@@ -3,7 +3,8 @@ import 'package:flutter/services.dart';
 
 class ModifiedTextField extends StatelessWidget {
   /// Creates a TextField with properties in addition to the basic TextField
-  /// Widget.
+  /// Widget. The Widget exposes a sub-set of properties available in the base
+  /// TextFeild Widget as per the requirements of the underline project.
   ///
   /// The [label] must not be null
   ///

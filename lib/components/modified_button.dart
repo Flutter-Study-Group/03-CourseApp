@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class ModifiedButton extends StatelessWidget {
+  /// Widget with [RaisedButton] widget at its core, wrapped with decorations
+  ///
   final Function onPressed;
   final Widget buttonChild;
   final EdgeInsets padding;

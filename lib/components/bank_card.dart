@@ -5,6 +5,12 @@ import 'package:course_app/utilities/constants.dart';
 import 'package:flutter/material.dart';
 
 class BankCard extends StatelessWidget {
+  /// Widget to create a bank credit card using the material components.
+  /// The Widget is set to always take 30% of the available screen height
+  /// and added [15 points] of margin around it.
+  ///
+  /// The properties [cardNumber], [cardHolder], [cardDate] cannot be null
+  ///
   const BankCard({
     @required this.cardNumber,
     @required this.cardHolderName,

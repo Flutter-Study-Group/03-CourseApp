@@ -1,6 +1,6 @@
 import 'package:course_app/components/bank_card.dart';
-import 'package:course_app/components/card_number_input_formatter.dart';
-import 'package:course_app/components/date_input_formatter.dart';
+import 'package:course_app/utilities/card_number_input_formatter.dart';
+import 'package:course_app/utilities/date_input_formatter.dart';
 import 'package:course_app/components/modified_button.dart';
 import 'package:course_app/components/modified_text_field.dart';
 import 'package:course_app/utilities/constants.dart';

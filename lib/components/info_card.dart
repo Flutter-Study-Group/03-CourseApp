@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 
 class InfoCard extends StatelessWidget {
+  /// A Widget to create a container widget with centered text
+  ///
+  ///
+  InfoCard({this.cardTitle = '', this.cardSubTitle = ''});
+
   final String cardTitle;
   final String cardSubTitle;
-
-  InfoCard({this.cardTitle = '', this.cardSubTitle = ''});
 
   @override
   Widget build(BuildContext context) {
