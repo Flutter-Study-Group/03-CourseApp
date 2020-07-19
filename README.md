@@ -1,6 +1,11 @@
-# course_app
+# Course App
 
 A new Flutter project.
+
+![Course-App-Landing-Page](/screenshots/landing.png)
+![COVID-App-Main-Page](/screenshots/home.png)
+![COVID-App-Main-Page](/screenshots/card.png)
+![COVID-App-Main-Page](/screenshots/card_filled.png)
 
 ## Getting Started
 
