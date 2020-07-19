@@ -15,9 +15,9 @@ class PaymentScreen extends StatefulWidget {
 }
 
 class _PaymentScreenState extends State<PaymentScreen> {
-  String _cardNumber = '4242 4242 4242 4242';
-  String _cardHolderName = 'Leslee Harron';
-  String _cardDate = '04/22';
+  String _cardNumber = 'XXXX XXXX XXXX XXXX';
+  String _cardHolderName = 'XXXXXX XXXXXX';
+  String _cardDate = 'XX/XX';
   TextEditingController _numberTextController;
   FocusNode cardNumberFocus = FocusNode();
   FocusNode dateFocus = FocusNode();
@@ -105,7 +105,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                 Row(
                   children: <Widget>[
                     Flexible(
-                      flex: 2,
+                      flex: 1,
                       child: ModifiedTextField(
                         label: 'Date',
                         keyboardType: TextInputType.number,
