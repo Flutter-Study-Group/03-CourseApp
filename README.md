@@ -1,6 +1,13 @@
-# coursesapp
+# Course App
 
-A new Flutter application.
+A new Flutter project.
+
+## Some screenshots
+
+![Course-App-Landing-Page](/screenshots/landing.png)
+![COVID-App-Main-Page](/screenshots/home.png)
+![COVID-App-Main-Page](/screenshots/card.png)
+![COVID-App-Main-Page](/screenshots/card_filled.png)
 
 ## Getting Started
 

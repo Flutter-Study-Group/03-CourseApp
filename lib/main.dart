@@ -1,30 +1,33 @@
+import 'package:course_app/screens/courses_screen.dart';
+import 'package:course_app/screens/landing_screen.dart';
+import 'package:course_app/screens/payment_screen.dart';
+import 'package:course_app/utilities/constants.dart';
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(App());
-}
+void main() => runApp(CourseApp());
 
-class App extends StatelessWidget {
+class CourseApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: MyPage(),
-    );
-  }
-}
-
-class MyPage extends StatefulWidget {
-  @override
-  _MyAppState createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyPage> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: Text("Hello World"),
+      theme: ThemeData.light().copyWith(
+        scaffoldBackgroundColor: Colors.white,
+        textTheme: TextTheme(
+          bodyText2: TextStyle(
+            fontFamily: 'Poppins',
+            color: Color(kDefaultHeadingColour),
+          ),
+          headline4: TextStyle(
+            fontFamily: 'Poppins',
+          ),
+        ),
       ),
+      initialRoute: LandingScreen.id,
+      routes: {
+        LandingScreen.id: (context) => LandingScreen(),
+        CoursesScreen.id: (context) => CoursesScreen(),
+        PaymentScreen.id: (context) => PaymentScreen(),
+      },
     );
   }
 }
