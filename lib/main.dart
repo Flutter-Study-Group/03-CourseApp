@@ -1,30 +1,18 @@
 import 'package:flutter/material.dart';
 
+import 'screens/landing_page.dart';
+
 void main() {
-  runApp(App());
+  runApp(CourseApp());
 }
 
-class App extends StatelessWidget {
+class CourseApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: MyPage(),
-    );
-  }
-}
-
-class MyPage extends StatefulWidget {
-  @override
-  _MyAppState createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyPage> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: Text("Hello World"),
-      ),
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(scaffoldBackgroundColor: Colors.white),
+      home: LandingPage(),
     );
   }
 }
