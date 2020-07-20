@@ -1,3 +1,4 @@
+import 'package:flip_card/flip_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -12,10 +13,12 @@ class PaymentPage extends StatefulWidget {
 class _PaymentPageState extends State<PaymentPage> {
   final _formKey = GlobalKey<FormState>();
 
-  String _name = '';
-  String _cardNumber = '';
-  String _expiryDate = '';
-  String _cvc = '';
+  String _name = 'John Doe';
+  String _cardNumber = 'xxxx xxxx xxxx xxxx';
+  String _expiryDate = '12/20';
+  String _cvc = 'xxx';
+
+  final GlobalKey<FlipCardState> _cardKey = GlobalKey<FlipCardState>();
 
   @override
   Widget build(BuildContext context) {
@@ -61,63 +64,118 @@ class _PaymentPageState extends State<PaymentPage> {
               ),
               Padding(
                 padding: const EdgeInsets.all(15.0),
-                child: Stack(
-                  children: <Widget>[
+                child: FlipCard(
+                  key: _cardKey,
+                  back: Stack(children: <Widget>[
                     Container(
                       width: MediaQuery.of(context).size.width,
                       child: SvgPicture.asset(
-                        'assets/payment/card.svg',
+                        'assets/payment/card_back.svg',
                         fit: BoxFit.fill,
                       ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 20),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children: [
-                          const SizedBox(
-                            height: 90,
-                          ),
-                          Text(
-                            _cardNumber,
-                            style: const TextStyle(
-                              fontSize: 26,
-                              color: Colors.white,
-                              shadows: [
-                                Shadow(
-                                  offset: Offset(0.0, 0.7),
-                                  blurRadius: 3.0,
-                                  color: Color.fromARGB(80, 77, 5, 169),
-                                )
-                              ],
-                            ),
-                          ),
-                          const SizedBox(
-                            height: 20,
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    Column(
+                      children: [
+                        const SizedBox(
+                          height: 40,
+                        ),
+                        Container(
+                          color: Colors.black,
+                          height: 50,
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 25),
+                          child: Row(
                             children: [
-                              Text(
-                                _name,
-                                style: const TextStyle(
-                                  fontSize: 26,
+                              Expanded(
+                                flex: 3,
+                                child: Container(
                                   color: Colors.white,
+                                  height: 40,
                                 ),
                               ),
-                              Text(
-                                _expiryDate,
-                                style: const TextStyle(
-                                  fontSize: 26,
-                                  color: Colors.white,
+                              Expanded(
+                                child: Container(
+                                  alignment: Alignment.center,
+                                  color: Colors.white70,
+                                  height: 40,
+                                  child: Text(
+                                    _cvc,
+                                    style: const TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 16,
+                                    ),
+                                    textAlign: TextAlign.center,
+                                  ),
                                 ),
                               ),
                             ],
-                          )
-                        ],
+                          ),
+                        )
+                      ],
+                    )
+                  ]),
+                  front: Stack(
+                    children: <Widget>[
+                      Container(
+                        width: MediaQuery.of(context).size.width,
+                        child: SvgPicture.asset(
+                          'assets/payment/card_front.svg',
+                          fit: BoxFit.fill,
+                        ),
                       ),
-                    ),
-                  ],
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 20),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          children: [
+                            const SizedBox(
+                              height: 90,
+                            ),
+                            Text(
+                              _cardNumber,
+                              style: const TextStyle(
+                                fontSize: 26,
+                                color: Colors.white,
+                                shadows: [
+                                  Shadow(
+                                    offset: Offset(0.0, 0.7),
+                                    blurRadius: 3.0,
+                                    color: Color.fromARGB(80, 77, 5, 169),
+                                  )
+                                ],
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 20,
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  _name,
+                                  style: const TextStyle(
+                                    fontSize: 26,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                                Text(
+                                  _expiryDate,
+                                  style: const TextStyle(
+                                    fontSize: 26,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ],
+                            )
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
               const SizedBox(
@@ -133,6 +191,11 @@ class _PaymentPageState extends State<PaymentPage> {
                   child: Column(
                     children: <Widget>[
                       TextFormField(
+                        onTap: () {
+                          if (!_cardKey.currentState.isFront) {
+                            _cardKey.currentState.toggleCard();
+                          }
+                        },
                         onChanged: (text) {
                           setState(() {
                             _name = text;
@@ -153,6 +216,11 @@ class _PaymentPageState extends State<PaymentPage> {
                         height: 15,
                       ),
                       TextFormField(
+                        onTap: () {
+                          if (!_cardKey.currentState.isFront) {
+                            _cardKey.currentState.toggleCard();
+                          }
+                        },
                         onChanged: (text) {
                           setState(() {
                             _cardNumber = text;
@@ -181,6 +249,11 @@ class _PaymentPageState extends State<PaymentPage> {
                         children: [
                           Expanded(
                             child: TextFormField(
+                              onTap: () {
+                                if (!_cardKey.currentState.isFront) {
+                                  _cardKey.currentState.toggleCard();
+                                }
+                              },
                               onChanged: (text) {
                                 setState(() {
                                   _expiryDate = text;
@@ -209,6 +282,11 @@ class _PaymentPageState extends State<PaymentPage> {
                           ),
                           Expanded(
                             child: TextFormField(
+                                onTap: () {
+                                  if (_cardKey.currentState.isFront) {
+                                    _cardKey.currentState.toggleCard();
+                                  }
+                                },
                                 onChanged: (text) {
                                   setState(() {
                                     _cvc = text;

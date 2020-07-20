@@ -24,6 +24,7 @@ dependencies:
   flutter:
     sdk: flutter
   google_fonts: ^1.1.0
+  flip_card: ^0.4.4
 
   flutter_svg: ^0.18.0
 
