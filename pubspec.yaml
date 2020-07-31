@@ -9,8 +9,9 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  font_awesome_flutter: ^8.8.1
 
+  font_awesome_flutter: ^8.8.1
+  flare_flutter: ^2.0.5
   cupertino_icons: ^0.1.2
 
 dev_dependencies:
@@ -22,6 +23,7 @@ flutter:
 
   assets:
     - assets/images/
+    - assets/flare/
   
   fonts:
     - family: Poppins

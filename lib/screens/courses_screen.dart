@@ -1,8 +1,10 @@
+import 'package:course_app/components/animated_navbar.dart';
 import 'package:course_app/components/course_card.dart';
 import 'package:course_app/components/info_card.dart';
 import 'package:course_app/components/modified_button.dart';
 import 'package:course_app/screens/payment_screen.dart';
 import 'package:course_app/utilities/constants.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class CoursesScreen extends StatelessWidget {
@@ -157,60 +159,8 @@ class CoursesScreen extends StatelessWidget {
             ],
           ),
         ),
-        bottomNavigationBar: ModifiedBottomNavigation(),
+        bottomNavigationBar: AnimatedNavBar(),
       ),
-    );
-  }
-}
-
-class ModifiedBottomNavigation extends StatefulWidget {
-  const ModifiedBottomNavigation({
-    Key key,
-  }) : super(key: key);
-
-  @override
-  _ModifiedBottomNavigationState createState() =>
-      _ModifiedBottomNavigationState();
-}
-
-class _ModifiedBottomNavigationState extends State<ModifiedBottomNavigation> {
-  int _selectedIndex = 1;
-
-  void _onItemTapped(int itemIndex) {
-    setState(() {
-      _selectedIndex = itemIndex;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return BottomNavigationBar(
-      backgroundColor: Color(kDefaultHeadingColour),
-      showSelectedLabels: false,
-      showUnselectedLabels: false,
-      iconSize: 30.0,
-      items: <BottomNavigationBarItem>[
-        BottomNavigationBarItem(
-          icon: Icon(
-            Icons.add_box,
-          ),
-          title: Text(''),
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.list),
-          title: Text(''),
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(
-            Icons.inbox,
-          ),
-          title: Text(''),
-        ),
-      ],
-      currentIndex: _selectedIndex,
-      selectedItemColor: Colors.white,
-      unselectedItemColor: Colors.white54,
-      onTap: _onItemTapped,
     );
   }
 }
