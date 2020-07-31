@@ -1,4 +1,5 @@
 import 'package:courses/payment_page.dart';
+import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -8,29 +9,7 @@ class CoursesPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: BottomNavigationBar(
-        showSelectedLabels: false,
-        showUnselectedLabels: false,
-        currentIndex: 1,
-        iconSize: 30.0,
-        selectedItemColor: Colors.white,
-        unselectedItemColor: Colors.white.withAlpha(80),
-        backgroundColor: const Color(0xff07122A),
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.add_box),
-            title: Text(''),
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.layers),
-            title: Text(''),
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.inbox),
-            title: Text('Home'),
-          )
-        ],
-      ),
+      bottomNavigationBar: NavigationBar(),
       body: SafeArea(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -154,6 +133,92 @@ class CoursesPage extends StatelessWidget {
             ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class MenuItem {
+  final String name;
+  final Color color;
+  final double index;
+
+  MenuItem({this.name, this.color, this.index});
+}
+
+class NavigationBar extends StatefulWidget {
+  NavigationBar({Key key}) : super(key: key);
+
+  @override
+  _NavigationBarState createState() => _NavigationBarState();
+}
+
+class _NavigationBarState extends State<NavigationBar> {
+  final List<MenuItem> menuItems = [
+    MenuItem(index: -1.0, name: 'add', color: Colors.blueGrey),
+    MenuItem(index: 0.0, name: 'size', color: Colors.blueGrey),
+    MenuItem(index: 1.0, name: 'inbox', color: Colors.blueGrey),
+  ];
+
+  MenuItem activeMenuItem;
+
+  @override
+  void initState() {
+    super.initState();
+    activeMenuItem = menuItems[0];
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final double width = MediaQuery.of(context).size.width;
+    return Container(
+      height: 80,
+      color: const Color(0xff07122A),
+      child: Stack(
+        children: [
+          AnimatedContainer(
+            duration: Duration(milliseconds: 200),
+            alignment: Alignment(activeMenuItem.index, 1),
+            child: AnimatedContainer(
+              duration: Duration(milliseconds: 1000),
+              height: 8,
+              width: width * (1 / 3),
+              color: activeMenuItem.color,
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 20),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: menuItems
+                  .map(
+                    (item) => GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          activeMenuItem = item;
+                        });
+                      },
+                      child: AspectRatio(
+                        aspectRatio: 1,
+                        child: Padding(
+                          padding: EdgeInsets.only(top: 5),
+                          child: FlareActor(
+                            'assets/courses/menu_${item.name}.flr',
+                            alignment: Alignment.center,
+                            fit: BoxFit.contain,
+                            animation: item.name == activeMenuItem.name
+                                ? 'activate'
+                                : 'hide',
+                          ),
+                        ),
+                      ),
+                    ),
+                  )
+                  .toList(),
+            ),
+          ),
+        ],
       ),
     );
   }
