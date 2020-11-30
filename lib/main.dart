@@ -1,30 +1,29 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+
+import 'splash_page.dart';
 
 void main() {
-  runApp(App());
+  runApp(CoursesApp());
 }
 
-class App extends StatelessWidget {
+class CoursesApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
     return MaterialApp(
-      home: MyPage(),
-    );
-  }
-}
-
-class MyPage extends StatefulWidget {
-  @override
-  _MyAppState createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyPage> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: Text("Hello World"),
+      title: 'Courses',
+      theme: ThemeData(
+        visualDensity: VisualDensity.adaptivePlatformDensity,
+        scaffoldBackgroundColor: const Color(0xffE5E5E5),
+        textTheme: GoogleFonts.poppinsTextTheme(
+          textTheme,
+        ).apply(
+          bodyColor: const Color(0xff07122A),
+          displayColor: const Color(0xff07122A),
+        ),
       ),
+      home: const SplashPage(),
     );
   }
 }

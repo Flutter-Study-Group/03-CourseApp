@@ -1,0 +1,20 @@
+<svg width="135" height="135" 
+    xmlns="http://www.w3.org/2000/svg" 
+    xmlns:svg="http://www.w3.org/2000/svg">
+    <defs>
+        <radialGradient cx="0" cy="0" gradientTransform="translate(25.2719 105.351) rotate(65.1234) scale(146.314)" gradientUnits="userSpaceOnUse" id="paint0_radial" r="1">
+            <stop offset="0.52073" stop-color="white"/>
+            <stop offset="1" stop-color="white" stop-opacity="0"/>
+        </radialGradient>
+    </defs>
+    <g class="layer">
+        <title>Layer 1</title>
+        <path d="m0,12c0,-6.6274 5.3726,-12 12,-12l111,0c6.627,0 12,5.3726 12,12l0,111c0,6.627 -5.373,12 -12,12l-111,0c-6.6274,0 -12,-5.373 -12,-12l0,-111z" fill="#07122A" id="svg_1"/>
+        <ellipse cx="-3.8082" cy="126.192" fill="url(#paint0_radial)" fill-opacity="0.5" id="svg_2" opacity="0.2" rx="87.1328" ry="87.1328" transform="rotate(99.3984 -3.80819 126.192)"/>
+        <path d="m59.338,91.911c4.516,0 8.182,-3.666 8.182,-8.182l0,-8.182l-8.182,0c-4.517,0 -8.182,3.665 -8.182,8.182c0,4.516 3.665,8.182 8.182,8.182z" fill="white" id="svg_3"/>
+        <path d="m51.156,67.366c0,-4.5157 3.665,-8.1816 8.182,-8.1816l8.182,0l0,16.3616l-8.182,0c-4.517,0.002 -8.182,-3.664 -8.182,-8.18z" fill="#E2E2E2" id="svg_4"/>
+        <path d="m51.156,51.0043c0,-4.5162 3.665,-8.1821 8.182,-8.1821l8.182,0l0,16.3622l-8.182,0c-4.517,0 -8.182,-3.664 -8.182,-8.1801z" fill="white" id="svg_5"/>
+        <path d="m67.518,42.8222l8.182,0c4.516,0 8.182,3.6659 8.182,8.1821c0,4.5161 -3.666,8.1801 -8.182,8.1801l-8.182,0l0,-16.3622z" fill="#ECECEC" id="svg_6"/>
+        <path d="m83.882,67.366c0,4.517 -3.666,8.182 -8.182,8.182c-4.516,0 -8.182,-3.665 -8.182,-8.182c0,-4.5157 3.666,-8.1816 8.182,-8.1816c4.516,0 8.182,3.6659 8.182,8.1816z" fill="white" id="svg_7"/>
+    </g>
+</svg>

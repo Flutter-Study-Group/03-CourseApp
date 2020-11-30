@@ -1,0 +1,10 @@
+<svg width="327" height="214">
+    <defs>
+        <linearGradient id="paint0_linear" x1="24" y1="135" x2="351" y2="135" gradientUnits="userSpaceOnUse" gradientTransform="matrix(1, 0, 0, 1, -24.294093, -27.889576)">
+            <stop stop-color="#07122A"></stop>
+            <stop offset="1" stop-color="#141E35"></stop>
+        </linearGradient>
+    </defs>
+    <rect x="0" y="0" width="327" height="214" rx="8" fill="url(#paint0_linear)"></rect>
+    <ellipse cx="255" cy="110" rx="146.451" ry="147.571" fill="white" fill-opacity="0.12"></ellipse>
+</svg>
